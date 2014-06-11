@@ -39,7 +39,7 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#{{../uniqueId}}_{{method}}_request" data-toggle="tab">Request</a>
+                                <a href="#{{../uniqueId}}_{{method}}_request"data-toggle="tab">Request</a>
                             </li>
                             {{#if responses}}
                                 <li>
@@ -55,7 +55,24 @@
                                     <h3>URI Parameters</h3>
                                     <ul>
                                         {{#each ../../allUriParameters}}
-                                            <li><strong>{{this.displayName}}</strong>: {{this.type}}</li>
+                                        <li><strong>{{this.displayName}}</strong>
+                                            <em>
+                                                {{#if this.enum}}
+                                                        one of ({{this.enum}})
+                                                {{else}}
+                                                        ({{this.type}})
+                                                {{/if}}
+                                            </em>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                {{/if}}
+
+                                {{#if headers}}
+                                    <h3>Headers</h3>
+                                    <ul>
+                                        {{#each headers}}
+                                            <li><strong>{{@key}}</strong>: {{description}} (<code>{{type}}</code>)</li>
                                         {{/each}}
                                     </ul>
                                 {{/if}}
